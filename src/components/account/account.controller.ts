@@ -3,18 +3,29 @@ import {
   Dolph,
   SuccessResponse,
   DRequest,
-  DResponse
+  DResponse,
+  TryCatchAsyncDec,
+  validateBodyMiddleware,
 } from "@dolphjs/dolph/common";
-import { Get, Route } from "@dolphjs/dolph/decorators";
+import { Get, Post, Route, UseMiddleware } from "@dolphjs/dolph/decorators";
+import { RegisterAccountDto } from "./account.dto";
 
-@Route('account')
+@Route("account")
 export class AccountController extends DolphControllerHandler<Dolph> {
   constructor() {
     super();
   }
 
+  @Post()
+  @UseMiddleware(validateBodyMiddleware(RegisterAccountDto))
+  @TryCatchAsyncDec
+  async createAccount(req: DRequest, res: DResponse) {}
+
   @Get("greet")
-  async greet (req: DRequest, res: DResponse) {
-    SuccessResponse({ res, body: { message: "you've reached the account endpoint." } });
+  async greet(req: DRequest, res: DResponse) {
+    SuccessResponse({
+      res,
+      body: { message: "you've reached the account endpoint." },
+    });
   }
 }
