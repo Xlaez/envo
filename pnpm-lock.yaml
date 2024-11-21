@@ -17,6 +17,9 @@ importers:
       class-validator:
         specifier: ^0.14.1
         version: 0.14.1
+      helmet:
+        specifier: ^8.0.0
+        version: 8.0.0
     devDependencies:
       '@swc/cli':
         specifier: ^0.1.62
@@ -827,6 +830,10 @@ packages:
   helmet@7.2.0:
     resolution: {integrity: sha512-ZRiwvN089JfMXokizgqEPXsl2Guk094yExfoDXR0cBYWxtBbaSww/w+vT4WEJsBW2iTUi1GgZ6swmoug3Oy4Xw==}
     engines: {node: '>=16.0.0'}
+
+  helmet@8.0.0:
+    resolution: {integrity: sha512-VyusHLEIIO5mjQPUI1wpOAEu+wl6Q0998jzTxqUYGE45xCIcAxy3MsbEK/yyJUJ3ADeMoB6MornPH6GMWAf+Pw==}
+    engines: {node: '>=18.0.0'}
 
   http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
@@ -2665,6 +2672,8 @@ snapshots:
       function-bind: 1.1.2
 
   helmet@7.2.0: {}
+
+  helmet@8.0.0: {}
 
   http-cache-semantics@4.1.1: {}
 
