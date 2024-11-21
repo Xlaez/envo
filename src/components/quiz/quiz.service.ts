@@ -16,4 +16,14 @@ export class QuizService extends DolphServiceHandler<Dolph> {
   async addQuestion(dto: AddQuestionDto) {
     return this.quizModel.create(dto);
   }
+
+  async getQuestions(no: number) {
+    const questions = await this.quizModel.find().limit(no);
+
+    return questions;
+  }
+
+  async removeQuestion(id: string) {
+    return this.quizModel.findByIdAndDelete(id);
+  }
 }
