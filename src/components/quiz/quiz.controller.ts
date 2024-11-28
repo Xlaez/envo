@@ -3,18 +3,35 @@ import {
   Dolph,
   SuccessResponse,
   DRequest,
-  DResponse
+  DResponse,
+  validateBodyMiddleware,
+  TryCatchAsyncDec,
 } from "@dolphjs/dolph/common";
-import { Get, Route } from "@dolphjs/dolph/decorators";
+import { Get, Post, Route, UseMiddleware } from "@dolphjs/dolph/decorators";
+import { QuizService } from "./quiz.service";
+import { AddQuestionDto } from "./quiz.dto";
 
-@Route('quiz')
+@Route("quiz")
 export class QuizController extends DolphControllerHandler<Dolph> {
+  private QuizService: QuizService;
   constructor() {
     super();
   }
 
   @Get("greet")
-  async greet (req: DRequest, res: DResponse) {
-    SuccessResponse({ res, body: { message: "you've reached the quiz endpoint." } });
+  async greet(req: DRequest, res: DResponse) {
+    SuccessResponse({
+      res,
+      body: { message: "you've reached the quiz endpoint." },
+    });
+  }
+
+  @Post()
+  @UseMiddleware(validateBodyMiddleware(AddQuestionDto))
+  @TryCatchAsyncDec
+  async createQuiz(req: DRequest, res: DResponse) {
+    const quiz = await this.QuizService.addQuestion(req.body);
+
+    SuccessResponse({ res, body: quiz });
   }
 }

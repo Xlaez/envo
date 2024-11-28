@@ -11,15 +11,12 @@ export class AddQuestionDto {
   @IsNotEmpty()
   question: string;
 
-  @IsNumber()
-  answer: number;
+  @IsString()
+  answer: string;
 
   @IsNumber()
   @IsOptional()
   duration?: number;
-
-  @IsArray()
-  options: [string];
 
   @IsNumber()
   point: number;
